@@ -4,18 +4,20 @@ require 'net/http'
 
 module FollowRedirect
   
-  def resolve(url)
-    redirect_limit = 10
-    (0..9).each do 
-      uri = URI.parse(url)
-      response = nil
-      Net::HTTP.start(uri.host, uri.port) {|http|
-        response = http.head(uri.request_uri)
-      }
-      break unless response.key?("Location")
-      url = response['Location']
+  class Url
+    def self.resolve(url)
+      redirect_limit = 10
+      (0..9).each do 
+        uri = URI.parse(url)
+        response = nil
+        Net::HTTP.start(uri.host, uri.port) {|http|
+          response = http.head(uri.request_uri)
+        }
+        break unless response.key?("Location")
+        url = response['Location']
+      end
+      url
     end
-    url
   end
   
 end
