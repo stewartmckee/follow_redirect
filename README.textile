@@ -1,0 +1,15 @@
+h1. follow_redirect
+
+h2. description
+
+Simple gem to find the eventual destination of a url through its redirects if it has any.
+
+h2. installation
+
+Just add 'gem follow_redirects' to your Gemfile
+
+h2. usage
+
+_FollowRedirect::Url.resolve("http://google.com")_
+
+Simples.
